@@ -17,13 +17,13 @@ export default class NotificationsManager extends React.Component {
   componentDidUpdate(prevProps) {
     const { succeeded, failed } = this.props;
 
-    if (succeeded !== prevProps.succeeded && succeeded) {
+    if (succeeded && !prevProps.succeeded) {
       this.showSuccessNotification();
       this.setHideNotificationTimeout('isSuccessNotificationVisible');
       return;
     }
 
-    if (failed !== prevProps.failed && failed) {
+    if (failed && !prevProps.failed) {
       this.showErrorNotification();
       this.setHideNotificationTimeout('isErrorNotificationVisible');
       return;
