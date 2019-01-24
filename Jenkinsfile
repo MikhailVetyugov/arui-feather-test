@@ -3,16 +3,16 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'echo "Hello World"'
-
                 retry(3) {
                     sh 'node --version'
                     sh 'npm --version'
                 }
 
+                sh 'npm i';
+                sh 'npm i -g http-server'
+
                 timeout(time: 3, unit: 'MINUTES') {
                     sh 'npm run build'
-                    sh 'npm i -g http-server'
                 }
             }
         }
