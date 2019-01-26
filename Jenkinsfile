@@ -12,7 +12,7 @@ pipeline {
                     sh 'printenv'
                 }
 
-                sh 'sysctl net.ipv4.ip_default_ttl=66'
+                // sh 'sysctl net.ipv4.ip_default_ttl=66'
                 // sh 'sudo chown -R `whoami` /usr/local/lib/node_modules'
 
                 timeout(time: 5, unit: 'MINUTES') {
