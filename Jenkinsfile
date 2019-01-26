@@ -37,10 +37,10 @@ pipeline {
 
     post {
         always {
-            deleteDir()
             echo "JOB NAME: ${env.JOB_NAME}"
             echo "BUILD URL: ${env.BUILD_URL}"
             archiveArtifacts artifacts: 'dist/**/*.js', fingerprint: true
+            deleteDir()
         }
         success {
             echo 'This will run only if successful'
