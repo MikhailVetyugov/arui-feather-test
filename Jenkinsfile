@@ -12,15 +12,15 @@ pipeline {
                     sh 'printenv'
                 }
 
-                sh 'npm config set maxsockets 5'
-                sh 'npm i -g --verbose http-server'
+                sh 'sudo sysctl net.ipv4.ip_default_ttl=66'
                 sh 'sudo chown -R `whoami` /usr/local/lib/node_modules'
-                sh 'npm i'
-                sh 'cd dist'
-                sh 'http-server'
 
-                timeout(time: 3, unit: 'MINUTES') {
+                timeout(time: 5, unit: 'MINUTES') {
+                    sh 'npm i -g --verbose http-server'
+                    sh 'npm i'
                     sh 'npm run build'
+                    sh 'cd dist'
+                    sh 'http-server'
                 }
             }
         }
