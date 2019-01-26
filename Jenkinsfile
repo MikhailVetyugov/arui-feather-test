@@ -20,7 +20,6 @@ pipeline {
                 // sh 'sysctl net.ipv4.ip_default_ttl=66'
                 // sh 'sudo chown -R `whoami` /usr/local/lib/node_modules'
 
-                //sh 'deleteDir()'
                 sh 'pwd'
                 sh "mkdir ~/.npm-global"
                 sh "npm config set prefix '~/.npm-global'"
@@ -45,10 +44,10 @@ pipeline {
 
     post {
         always {
-            echo 'This will always run'
-            echo "${env.JOB_NAME}"
-            echo "${env.BUILD_URL}"
+            echo "JOB NAME: ${env.JOB_NAME}"
+            echo "BUILD URL: ${env.BUILD_URL}"
             archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            sh 'deleteDir()'
         }
         success {
             echo 'This will run only if successful'
