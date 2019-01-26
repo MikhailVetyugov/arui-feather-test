@@ -16,7 +16,7 @@ pipeline {
                     sh 'printenv'
                 }
 
-                sh 'npm i';
+                // sh 'npm i';
                 sh 'npm i -g http-server'
 
                 timeout(time: 3, unit: 'MINUTES') {
