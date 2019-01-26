@@ -7,6 +7,11 @@ pipeline {
 
     stages {
         stage('build') {
+            withDockerContainer(args: "-u root", image: "${JOB_NAME}") {
+                    sh "npm install"
+                }
+            }
+
             steps {
                 retry(3) {
                     sh 'node --version'
@@ -14,7 +19,8 @@ pipeline {
                     sh 'printenv'
                 }
 
-                //sh 'npm i -g http-server'
+                sh 'npm i -g http-server'
+                sh 'sudo chown -R `whoami` /usr/local/lib/node_modules'
                 sh 'npm i'
                 sh 'cd dist'
                 sh 'http-server'
