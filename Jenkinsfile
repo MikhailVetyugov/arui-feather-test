@@ -26,7 +26,7 @@ pipeline {
                 sh "npm config set prefix '~/.npm-global'"
                 sh 'export PATH=~/.npm-global/bin:$PATH'
                 sh 'ls -la'
-                sh 'source ~/.bashrec'
+                sh 'source ~/.bashrc'
 
                 timeout(time: 5, unit: 'MINUTES') {
                     sh 'npm i -g --verbose http-server'
