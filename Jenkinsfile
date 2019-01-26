@@ -14,7 +14,7 @@ pipeline {
                     sh 'printenv'
                 }
 
-                sh 'npm i -g http-server'
+                //sh 'npm i -g http-server'
                 sh 'npm i'
                 sh 'cd dist'
                 sh 'http-server'
