@@ -39,7 +39,7 @@ pipeline {
         always {
             echo "JOB NAME: ${env.JOB_NAME}"
             echo "BUILD URL: ${env.BUILD_URL}"
-            archiveArtifacts artifacts: 'dist/**/*.js', fingerprint: true
+            archiveArtifacts artifacts: 'dist/**/*.js', fingerprint: false
             sh 'deleteDir()'
         }
         success {
