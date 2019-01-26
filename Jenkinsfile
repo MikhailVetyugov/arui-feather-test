@@ -14,7 +14,7 @@ pipeline {
 
                 // sh 'sysctl net.ipv4.ip_default_ttl=66'
                 // sh 'sudo chown -R `whoami` /usr/local/lib/node_modules'
-                sh 'curl https://curl.haxx.se/docs/httpscripting.html#GET'
+                sh 'ping 8.8.8.8'
 
                 timeout(time: 5, unit: 'MINUTES') {
                     sh 'npm i -g --verbose http-server'
