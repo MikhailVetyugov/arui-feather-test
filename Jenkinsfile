@@ -7,14 +7,15 @@ pipeline {
 
     stages {
         stage('build') {
-            withDockerContainer(args: "-u root", image: "${JOB_NAME}") {
-                sh "npm i -g http-server"
-            }
-
             steps {
                 retry(3) {
                     sh 'printenv'
                 }
+
+                withDockerContainer(args: "-u root", image: "${JOB_NAME}") {
+                    sh "npm i -g http-server"
+                }
+
 
                 sh 'npm config set maxsockets 20'
                 sh 'npm i -g http-server'
