@@ -2,7 +2,7 @@ pipeline {
     agent { docker { image 'node:11.6.0' } }
 
     environment {
-        MODE = 'production'
+        HOME = '.'
     }
 
     stages {
@@ -14,8 +14,10 @@ pipeline {
                     sh 'printenv'
                 }
 
-                // sh 'npm i';
-                sh 'sudo npm i -g http-server'
+                sh 'npm i -g http-server'
+                sh 'npm i'
+                sh 'cd dist'
+                sh 'http-server'
 
                 timeout(time: 3, unit: 'MINUTES') {
                     sh 'npm run build'
@@ -27,12 +29,8 @@ pipeline {
     post {
         always {
             echo 'This will always run'
-            //
             echo "${env.JOB_NAME}"
-            echo "${env.BUILD_NUMBER}"
             echo "${env.BUILD_URL}"
-            echo "${currentBuild.fullDisplayName}"
-            //
             archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
             // deleteDir() /* clean up our workspace */
         }
