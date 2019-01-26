@@ -2,9 +2,7 @@ pipeline {
     agent { docker { image 'node:11.6.0' } }
 
     environment {
-        //
-        DISABLE_AUTH = 'true'
-        DB_ENGINE    = 'sqlite'
+        MODE = 'production'
     }
 
     stages {
@@ -17,7 +15,7 @@ pipeline {
                 }
 
                 // sh 'npm i';
-                sh 'npm i -g http-server'
+                sh 'sudo npm i -g http-server'
 
                 timeout(time: 3, unit: 'MINUTES') {
                     sh 'npm run build'
@@ -32,21 +30,16 @@ pipeline {
             //
             echo "${env.JOB_NAME}"
             echo "${env.BUILD_NUMBER}"
-            echo "${env.JOB_NAME}"
-            echo "${env.JOB_NAME}"
+            echo "${env.BUILD_URL}"
+            echo "${currentBuild.fullDisplayName}"
             //
             archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
-            junit 'build/reports/**/*.xml'
             // deleteDir() /* clean up our workspace */
         }
         success {
             echo 'This will run only if successful'
         }
         failure {
-            //
-            mail to: 'mikhailvetyugov@gmail.com',
-                subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                body: "Something is wrong with ${env.BUILD_URL}"
             echo 'This will run only if failed'
         }
         unstable {
