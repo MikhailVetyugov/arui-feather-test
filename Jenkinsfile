@@ -13,6 +13,8 @@ pipeline {
     stages {
         stage('build') {
             steps {
+                deleteDir()
+
                 // retry(3) {
                 //     sh 'printenv'
                 //     sh 'whoami' // node
@@ -28,9 +30,9 @@ pipeline {
             }
         }
 
-        stage('Sanity check') {
+        stage('confirmation') {
             steps {
-                input "Does the staging environment look ok?"
+                input "Hi guys, can we proceed?"
             }
         }
     }
@@ -39,8 +41,7 @@ pipeline {
         always {
             echo "JOB NAME: ${env.JOB_NAME}"
             echo "BUILD URL: ${env.BUILD_URL}"
-            archiveArtifacts artifacts: 'dist/**/*.js', fingerprint: false
-            sh 'deleteDir()'
+            archiveArtifacts artifacts: 'dist/**/*.js', fingerprint: true
         }
         success {
             echo 'This will run only if successful'
