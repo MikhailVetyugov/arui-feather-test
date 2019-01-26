@@ -1,5 +1,10 @@
 pipeline {
-    agent { docker { image 'node:11.6.0' } }
+    agent {
+        docker {
+            image 'node:11.6.0'
+            args '--net host'
+        }
+    }
 
     environment {
         HOME = '.'
@@ -14,7 +19,7 @@ pipeline {
 
                 // sh 'sysctl net.ipv4.ip_default_ttl=66'
                 // sh 'sudo chown -R `whoami` /usr/local/lib/node_modules'
-                sh 'ping 8.8.8.8'
+                sh 'curl example.com'
 
                 timeout(time: 5, unit: 'MINUTES') {
                     sh 'npm i -g --verbose http-server'
