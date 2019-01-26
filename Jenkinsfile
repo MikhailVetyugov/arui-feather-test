@@ -12,11 +12,6 @@ pipeline {
                     sh 'printenv'
                 }
 
-                withDockerContainer(args: "-u root", image: "${JOB_NAME}") {
-                    sh "npm i -g http-server"
-                }
-
-
                 sh 'npm config set maxsockets 20'
                 sh 'npm i -g http-server'
                 sh 'sudo chown -R `whoami` /usr/local/lib/node_modules'
