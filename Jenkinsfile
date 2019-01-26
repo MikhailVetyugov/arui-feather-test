@@ -20,7 +20,7 @@ pipeline {
                 // sh 'sysctl net.ipv4.ip_default_ttl=66'
                 // sh 'sudo chown -R `whoami` /usr/local/lib/node_modules'
 
-                sh 'deleteDir()'
+                //sh 'deleteDir()'
                 sh 'pwd'
                 sh "mkdir ~/.npm-global"
                 sh "npm config set prefix '~/.npm-global'"
