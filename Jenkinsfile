@@ -12,8 +12,8 @@ pipeline {
                     sh 'printenv'
                 }
 
-                sh 'npm config set maxsockets 20'
-                sh 'npm i -g http-server'
+                sh 'npm config set maxsockets 5'
+                sh 'npm i -g --verbose http-server'
                 sh 'sudo chown -R `whoami` /usr/local/lib/node_modules'
                 sh 'npm i'
                 sh 'cd dist'
