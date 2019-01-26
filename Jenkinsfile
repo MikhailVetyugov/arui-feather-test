@@ -21,6 +21,7 @@ pipeline {
                 // sh 'sudo chown -R `whoami` /usr/local/lib/node_modules'
 
                 sh '$PATH'
+                sh 'whoami'
 
                 timeout(time: 5, unit: 'MINUTES') {
                     sh 'npm i -g --verbose http-server'
