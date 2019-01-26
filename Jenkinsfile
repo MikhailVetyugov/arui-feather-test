@@ -21,7 +21,6 @@ pipeline {
                 // sh 'sudo chown -R `whoami` /usr/local/lib/node_modules'
 
                 sh 'pwd'
-                sh "mkdir ~/.npm-global"
                 sh "npm config set prefix '~/.npm-global'"
                 sh 'export PATH=~/.npm-global/bin:$PATH'
                 sh 'ls -la'
