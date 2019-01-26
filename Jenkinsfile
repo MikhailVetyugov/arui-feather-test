@@ -8,17 +8,15 @@ pipeline {
     stages {
         stage('build') {
             withDockerContainer(args: "-u root", image: "${JOB_NAME}") {
-                    sh "npm install"
-                }
+                sh "npm i -g http-server"
             }
 
             steps {
                 retry(3) {
-                    sh 'node --version'
-                    sh 'npm --version'
                     sh 'printenv'
                 }
 
+                sh 'npm config set maxsockets 20'
                 sh 'npm i -g http-server'
                 sh 'sudo chown -R `whoami` /usr/local/lib/node_modules'
                 sh 'npm i'
