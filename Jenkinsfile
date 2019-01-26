@@ -13,8 +13,6 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                deleteDir()
-
                 // retry(3) {
                 //     sh 'printenv'
                 //     sh 'whoami' // node
@@ -39,6 +37,7 @@ pipeline {
 
     post {
         always {
+            deleteDir()
             echo "JOB NAME: ${env.JOB_NAME}"
             echo "BUILD URL: ${env.BUILD_URL}"
             archiveArtifacts artifacts: 'dist/**/*.js', fingerprint: true
