@@ -1,9 +1,6 @@
 pipeline {
     agent {
-        docker {
-            image 'node:11.6.0'
-            args '--net host'
-        }
+        label 'docker-slave'
     }
 
     environment {
