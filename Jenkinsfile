@@ -21,9 +21,9 @@ pipeline {
                 timeout(time: 5, unit: 'MINUTES') {
                     sh 'printenv'
 
-                    sh 'START OF LS'
+                    // sh 'echo "START OF LS"'
                     sh 'ls /'
-                    sh 'END OF LS'
+                    // sh 'echo "END OF LS"'
 
                     nodejs(nodeJSInstallationName: 'Node 8.16.1') {
                       sh 'npm i'
