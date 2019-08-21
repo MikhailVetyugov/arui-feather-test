@@ -19,8 +19,12 @@ pipeline {
                 // see https://stackoverflow.com/questions/52979927/npm-warn-checkpermissions-missing-write-access-to-usr-local-lib-node-modules
 
                 timeout(time: 5, unit: 'MINUTES') {
-                    sh 'npm i'
-                    sh 'npm run build'
+                    sh 'printenv'
+
+                    nodejs(nodeJSInstallationName: 'Node 8.16.1', configId: '') {
+                      sh 'npm i'
+                      sh 'npm run build'
+                    }
                 }
             }
         }
