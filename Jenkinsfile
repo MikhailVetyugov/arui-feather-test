@@ -21,7 +21,11 @@ pipeline {
                 timeout(time: 5, unit: 'MINUTES') {
                     sh 'printenv'
 
-                    nodejs(nodeJSInstallationName: 'Node 8.16.1', configId: '') {
+                    sh '<LS>'
+                    sh 'ls /'
+                    sh '</LS>'
+
+                    nodejs(nodeJSInstallationName: 'Node 8.16.1') {
                       sh 'npm i'
                       sh 'npm run build'
                     }
